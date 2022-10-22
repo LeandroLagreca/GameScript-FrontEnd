@@ -1,0 +1,58 @@
+.imagenDetail {
+  inset: 0px;
+  width: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: top;
+  clip-path: inset(0px 0px 0px 0px);
+}
+
+.smallImages {
+  display: flex;
+  justify-content: center;
+}
+
+.carusel {
+  border-radius: 4px;
+}
+
+.small {
+  display: flex;
+  margin-right: 30px;
+  border-radius: 5px;
+  opacity: 60%;
+}
+
+.small:hover {
+  opacity: 100%;
+  height: 60px;
+  width: 100px;
+}
+
+.description {
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+.requeriments {
+  -webkit-user-modify: read-write-plaintext-only;
+}
+
+.newComment{
+  display: flex;
+  justify-content: center;
+}
+
+.iconsComment{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 70%;
+}
+
+.iconsComment :hover{
+  opacity: 160%;
+}
+
+section{
+  margin-top: 10px;
+}
