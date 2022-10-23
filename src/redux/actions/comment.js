@@ -3,7 +3,7 @@ import {
     getGameComments
 } from "../reducers/videoGame";
 
-const API = "http://localhost:3001/";
+const API = "https://gamescript22.herokuapp.com/";
 
 export const getComments = (id) => {
     return async function (dispatch) {

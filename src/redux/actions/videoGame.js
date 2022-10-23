@@ -10,7 +10,7 @@ import {
   cleanFilter,
 } from "../reducers/videoGame";
 
-const API = "http://localhost:3001/";
+const API = "https://gamescript22.herokuapp.com/";
 
 export const getGames = (name) => {
   const queryName = name ? name : "";

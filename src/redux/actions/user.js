@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setInfo, addToPurchases, addToCollection } from "../reducers/user";
-const API = "http://localhost:3001/";
+const API = "https://gamescript22.herokuapp.com/";
 
 export const getUserInfo = (email) => {
   return async function (dispatch) {
