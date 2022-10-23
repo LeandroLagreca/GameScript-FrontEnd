@@ -60,7 +60,7 @@ export default function LandingForm({ register, setRegister }) {
       email,
       password
     };
-    await axios.post("http://localhost:3001/register", newUserData);
+    await axios.post( "https://gamescript22.herokuapp.com/register", newUserData);
     setRegister(false);
   }
   
@@ -99,7 +99,7 @@ export default function LandingForm({ register, setRegister }) {
   }
 async function handleReset(email){
   const actionCodeSettings = {
-    url: 'http://localhost:3000/',
+    url:  "https://gamescript22.herokuapp.com/",
     handleCodeInApp: true,
   };
 sendPasswordResetEmail(auth, email = userInfo.email, actionCodeSettings)
