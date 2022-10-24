@@ -3,12 +3,12 @@ import { React } from 'react';
 
 const Paginated = ({ setGamesPerPage, setPage, total, current }) => {
 	const Paginated = (e, p) => {
-		setGamesPerPage(5);
+		setGamesPerPage(10);
 		setPage(p);
 	};
 
 	return (
-		<div style={{ textAling: 'center', justifyContent: 'center' }}>
+		<div style={{ textAling: 'center', justifyContent: 'center', paddingTop: 40 }}>
 			<Pagination
 				style={{
 					display: 'flex',

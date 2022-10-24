@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { ratingFilter, priceFilter, genreFilter, sort } from './utils'
 
 const page = window.sessionStorage.getItem('page')
 	? JSON.parse(window.sessionStorage.getItem('page'))
@@ -8,103 +7,107 @@ const page = window.sessionStorage.getItem('page')
 const filters = window.sessionStorage.getItem('filters')
 	? JSON.parse(window.sessionStorage.getItem('filters'))
 	: {
-		rating: 'none',
-		price: 'none',
-		genre: 'none',
-		sort: 'none'
+		search: '',
+		rating: '',
+		price: '',
+		genre: '',
+		sort: ''
 	};
 
 const initialState = {
 	games: [],
-	filterGames: [],
+	totalResults: 0,
 	discounts: [],
 	details: {},
-  	wishes: [],
+	wishes: [],
 	page,
 	loading: false,
 	filters,
 	comments: {}
 };
 
-
-
-
 const videoGameSlice = createSlice({
 	name: 'videogames',
 	initialState,
 	reducers: {
 		getAllGames: (state, { payload }) => {
-			state.games = payload;
-			state.filterGames = payload;
-			state.loading = false
+			state.games = payload.games;
+			state.totalResults = payload.totalResults;
+			state.loading = false;
 		},
 		getGameById: (state, { payload }) => {
 			state.details = payload;
-			state.loading = false
+			state.loading = false;
 		},
 		getAllDiscounts: (state, { payload }) => {
-			state.discounts = []
-		},
-		applyFilters: (state) => {
-			let newFilter = state.filterGames.length
-				? state.filterGames
-				: state.games
-			newFilter = ratingFilter(newFilter, state.filters.rating)
-			newFilter = priceFilter(newFilter, state.filters.price)
-			newFilter = genreFilter(newFilter, state.filters.genre)
-			newFilter = sort(newFilter, state.filters.sort)
-			state.filterGames = newFilter
-			const parseFilters = JSON.stringify(state.filters)
-			window.sessionStorage.setItem('filters', parseFilters)
+			state.discounts = payload;
 		},
 		filterByPrice: (state, { payload }) => {
 			state.filters = {
 				...state.filters,
-				price : payload
-			}
+				price: payload,
+			};
+			state.page = 1
 		},
 		filterByRating: (state, { payload }) => {
 			state.filters = {
 				...state.filters,
-				rating: payload
+				rating: payload,
 			};
+			state.page = 1
 		},
 		filterByGenre: (state, { payload }) => {
 			state.filters = {
 				...state.filters,
-				genre: payload
+				genre: payload,
 			};
+			state.page = 1
 		},
 		orderAlphabetically: (state, { payload }) => {
 			state.filters = {
 				...state.filters,
-				sort: payload
+				sort: payload,
 			};
 		},
 		filterBySearch: (state, { payload }) => {
-			state.filterGames = payload;
+			state.filters = {
+				search: payload,
+				rating: '' ,
+				price: '',
+				genre: '',
+				sort: ''
+			};
+			state.page = 1
 		},
-    	addToWishes: (state, { payload }) => {
-				state.wishes =  [...state.wishes, payload]
+		addToWishes: (state, { payload }) => {
+			state.wishes = [...state.wishes, payload];
 		},
 		removeToWishes: (state, { payload }) => {
-				state.wishes = state.wishes.filter(((e) => e.name !== payload))
+			state.wishes = state.wishes.filter((e) => e.name !== payload);
 		},
 		changePage: (state, { payload }) => {
-			state.page = payload
-			const parsePage = JSON.stringify(state.page)
-			window.sessionStorage.setItem('page', parsePage)
+			state.page = payload;
 		},
 		setLoading: (state) => {
-			state.loading = true
+			state.loading = true;
 		},
-		cleanFilter: (state, { payload }) => {
-			state.games = payload
+		cleanFilter: (state) => {
+			state.filters = {
+				search: '',
+				rating: '',
+				price: '',
+				genre: '',
+				sort: '',
+			};
+			state.page = 1
 		},
-		getGameComments: (state, {payload}) => {
-			console.log(payload)
-			state.comments = payload
-		}
+		getGameComments: (state, { payload }) => {
+			console.log(payload);
+			state.comments = payload;
+		},
+		rowVideoGames: (state, { payload }) => {
+			state.rowVideoGames = payload;
+		},
 	},
 });
 
@@ -112,18 +115,17 @@ export const {
 	getAllGames,
 	getGameById,
 	getAllDiscounts,
-	applyFilters,
 	filterByPrice,
 	filterByRating,
 	filterByGenre,
 	orderAlphabetically,
 	filterBySearch,
-  addToWishes, 
-  removeToWishes,
-  changePage,
+	addToWishes,
+	removeToWishes,
+	changePage,
 	setLoading,
 	cleanFilter,
-	getGameComments
+	getGameComments,
 } = videoGameSlice.actions;
 
 export default videoGameSlice.reducer;

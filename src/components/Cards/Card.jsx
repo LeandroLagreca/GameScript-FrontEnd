@@ -1,7 +1,9 @@
 import React from "react";
 
 
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
+
+import {Link } from "@mui/material";
 import {
   Card,
   CardActions,
@@ -9,6 +11,7 @@ import {
   CardMedia,
   Button,
   Typography,
+  Box
 } from "@mui/material";
 
 import { AddToCartButton, AddToWishes } from "../";
@@ -18,13 +21,23 @@ const styles = {
     display: "flex",
     flexDirection: 'column',
     justifyContent: 'space-between',
-    maxWidth: 345,
+    width: 200,
     height: 300,
     position: "relative",
+    overflow: 'visible'
   },
+  discountPercent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    background: 'green',
+    color: 'white',
+    fontSize: 20,
+    paddingX: .8,
+  }
 };
 
-export default function MainCard({ name, background_image, price, id }) {
+export default function MainCard({ name, background_image, price, id, discount }) {
   return (
     <Card sx={styles.card}>
       <CardMedia
@@ -42,9 +55,27 @@ export default function MainCard({ name, background_image, price, id }) {
         >
           {name}
         </Typography>
-        <Typography variant="subtitle2" color="text.primary">
-          {price}
-        </Typography>
+        {
+          !discount.status ? (
+            <Typography  variant="subtitle2" color="text.primary">
+              ${price}
+            </Typography>
+          ) : (
+            <Box display='flex'>
+              <Typography sx={styles.discountPercent} variant="subtitle2" color="text.primary">
+                {`${Math.floor(100 - (discount.currentPrice * 100) / price)}%`}
+              </Typography>
+              <Box sx={{background: 'rgba(160, 149, 147, .3)', textAlign: 'center', paddingX: .8}}>
+                <Typography sx={{textDecoration: 'line-through', color: 'gray', fontSize: 12}} variant="subtitle2">
+                  ${price}
+                </Typography>
+                <Typography sx={{color: 'green', fontSize: 15}} variant="subtitle2">
+                  ${discount.currentPrice}
+                </Typography>
+              </Box>
+            </Box>
+          )
+        }
       </CardContent>
       <CardActions>
         <AddToWishes
@@ -62,7 +93,7 @@ export default function MainCard({ name, background_image, price, id }) {
           styles={{ position: "absolute", right: 0, top: 0}}
         />
       </CardActions>
-      <Link to={`/detail/${id}`}>
+      <Link component={RouterLink} to={`/detail/${id}`} underline='none'>
         <Button variant="outlined" size="small" sx={{ width: "100%",}} color={"secondary"} >
           Detail
         </Button>

@@ -4,11 +4,13 @@ const cartList = localStorage.getItem('cartList') ? JSON.parse(localStorage.getI
 
 const initialState = {
 	status: 'guest',
+	id: null,
 	cartList,
 	admin: false,
 	emailVerified: false,
 	purchases: [],
-	collection: []
+	collection: [],
+	comments: []
 }
 
 const userSlice = createSlice({
@@ -60,9 +62,12 @@ const userSlice = createSlice({
 			},
 			addToCollection: (state, { payload }) => {
 				state.collection =  [...state.collection, payload]
+			},
+			getAllUserComments: (state, {payload}) => {
+				state.comments = payload
 			}
     }
 })
 
-export const { setSigned, addToCart, deleteFromCart, addOne, removeOne, setInfo, addToPurchases, addToCollection } = userSlice.actions
+export const { setSigned, addToCart, deleteFromCart, addOne, removeOne, setInfo, addToPurchases, addToCollection, getAllUserComments } = userSlice.actions
 export default userSlice.reducer

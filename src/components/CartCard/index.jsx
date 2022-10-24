@@ -17,7 +17,7 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0
-  } 
+  }
 };
 
 export default function CartCard({ id, picture, name, price, cant, stock }) {

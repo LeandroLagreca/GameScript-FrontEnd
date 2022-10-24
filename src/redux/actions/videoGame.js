@@ -4,25 +4,32 @@ import {
   getAllGames,
   getGameById,
   getAllDiscounts,
-  filterBySearch,
   addToWishes,
   removeToWishes,
   cleanFilter,
 } from "../reducers/videoGame";
 
-const API = "https://gamescript22.herokuapp.com/";
+const API = 'https://gamescript.vercel.app';
 
-export const getGames = (name) => {
-  const queryName = name ? name : "";
+export const getGames = ({name, rating, price, genre} = '', sort, page) => {
+  const queries = `filter[name]=${name}&filter[rating]=${rating}&filter[price]=${price}&filter[genre]=${genre}&options[sort]=${sort}&options[page]=${page}`
   return async function (dispatch) {
     try {
-      const { data } = await axios(API + `videogames?` + queryName);
-      dispatch(getAllGames(data.games));
+      const { data } = await axios(API + `videogames?${queries}`);
+      console.log(data)
+      dispatch(getAllGames({
+        games: data.games,
+        totalResults: data.total
+      }));
     } catch (error) {
-      return;
+      dispatch(getAllGames({
+        games: [],
+        totalResults: 0
+      }));
     }
   };
 };
+
 
 export const getDetails = (id) =>
   async function (dispatch) {
@@ -44,14 +51,6 @@ export const getDiscounts = () => {
     }
   }
 }
-
-export const setFilterBySearch = (games, input) => (dispatch) => {
-  const gamesCopy = [...games];
-  const gamesFilter = gamesCopy.filter((game) =>
-    game.name.toLowerCase().includes(input.toLowerCase())
-  );
-  dispatch(filterBySearch(gamesFilter));
-};
 
 // export const filterBySearch = (games, input) => {};
 

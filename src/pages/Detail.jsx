@@ -1,14 +1,15 @@
 import React from "react";
+import axios from "axios";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { AddToWishes, Loader } from "../components";
+import { AddToWishes, Loader, AddToCartButton } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading } from "../redux/reducers/videoGame";
 import { getDetails } from "../redux/actions/videoGame";
+import {getUserComments} from "../redux/actions/user"
 import Carousel from "react-material-ui-carousel";
 import LinkIcon from "@mui/icons-material/Link";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -24,25 +25,47 @@ import {
   TextField,
   Paper,
   IconButton,
+  Avatar,
+  Rating
 } from "@mui/material";
-import Comments from "../sections/Comments"
+import Comments from "../sections/Comments";
+import { auth } from "../firebase/credenciales";
+
+const imgLink = "Url de imagen de usuario";
 
 export default function Detail() {
   const { loading } = useSelector((state) => state.videogames);
   const gameDetail = useSelector((state) => state.videogames.details);
+  const userComment = useSelector ((state) => state.user.comments)
   const dispatch = useDispatch();
   let { id } = useParams();
 
-  const parse = require('html-react-parser');
-  
+  var userId = ""
+  var userName = ""
+  if(auth.currentUser !== null){ 
+  userId = auth.lastNotifiedUid
+  userName = auth.currentUser.email
+ }
+  const parse = require("html-react-parser"); //Parser de etiquetas a texto
+
   var imgCarousel = [];
   if (gameDetail.images) {
     var images = gameDetail.images;
     imgCarousel = images.split(",");
   }
 
+  console.log(userComment)
+
   //Estado locad de Form de Reseñas
-  const [value, setValue] = React.useState(); //Estado local
+  const [value, setValue] = React.useState({
+    userID: userId,
+    gameID: id,
+    comment: {
+      text: "",
+      userComment: "",
+      rating_like: 3,
+    },
+  }); //Estado local para enviar Comment con negritas y demas
   const [already, setAlready] = React.useState({
     bold: false,
     italic: false,
@@ -51,31 +74,60 @@ export default function Detail() {
     quote: false,
   });
 
-  const handleChange = (event) => {
+  //estado local para estrellas comment
+  const [estrella, setEstrella] = React.useState(3);
+
+  const handleChange = (e) => {
     //Handle para Form
-    setValue(event.target.value);
-    console.log(value);
+    value.comment.text=e.target.value
+    value.comment.userComment=userName
+    setValue({
+      ...value,
+      userID: auth.lastNotifiedUid
+    });
+    dispatch(getUserComments(userId))
+  console.log(value)
   };
-  
+
+  const handleStar = (e) => {
+    //Handle para Rating del form
+    value.comment.rating_like=e.target.value
+    setValue({
+      ...value
+  });
+  };
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    await axios.post("http://localhost:3001/comments", value);
+    setValue({
+    userID: userId,
+    gameID: id,
+    comment: {
+      text: "",
+      userComment: "",
+      rating_like: 3,
+    }});
+    alert("comment create succesfully");
+  }
+
   //Icons
-  const handleBold = (event) => {
+  const handleBold = (e) => {
     //Handle para BOLD
     if (already.bold === true) {
       console.log("entre");
     } else {
-      setValue("<b>" + value + "</b>");
+      setValue({...value, comment: { text: `<b>${value.comment.text}</b>`}});
       setAlready({ ...already, bold: true });
     }
-    console.log(value, already);
   };
   const handleItalic = (event) => {
     //Handle para ITALIC
     if (already.italic === true) {
       console.log("entre");
     } else {
-      setValue("<i>" + value + "</i>");
+      setValue({...value, comment: { text: `<i>${value.comment.text}</i>`}});
       setAlready({ ...already, italic: true });
-      console.log(value);
     }
   };
   const handleUnderline = (event) => {
@@ -83,9 +135,8 @@ export default function Detail() {
     if (already.underline === true) {
       console.log("entre");
     } else {
-      setValue("<u>" + value + "</u>");
+      setValue({...value, comment: { text: `<u>${value.comment.text}</u>`}});
       setAlready({ ...already, underline: true });
-      console.log(value);
     }
   };
   const handleLink = (event) => {
@@ -93,9 +144,8 @@ export default function Detail() {
     if (already.link === true) {
       console.log("entre");
     } else {
-      setValue(`<a href="#">` + value);
+      setValue({...value, comment: { text: `<a href="#">${value.comment.text}`}});
       setAlready({ ...already, link: true });
-      console.log(value);
     }
   };
   const handleQuote = (event) => {
@@ -103,23 +153,24 @@ export default function Detail() {
     if (already.quote === true) {
       console.log("entre");
     } else {
-      setValue("<blockquote>" + value + "</blockquote>");
+      setValue({...value, comment: { text: `<blockquote>${value.comment.text}</blockquote>`}});
       setAlready({ ...already, quote: true });
       console.log(value);
     }
   };
-  
+
   useEffect(() => {
     //UseEffect para traer los datos con la action x id
     dispatch(setLoading());
     dispatch(getDetails(id));
+    dispatch(getUserComments(userId))
   }, [dispatch, id]);
-  
+
   if (loading) return <Loader />;
-  
+
   return (
     <Container>
-      <DisableElevation/>
+      <DisableElevation />
       <Paper elevation={8} sx={{ padding: 2 }}>
         <Box display="flex" alignItems="flex-start" className="boxDivisor">
           <Box
@@ -159,9 +210,13 @@ export default function Detail() {
                 </Typography>
               </Box>
               <Box display="flex" sx={{ border: "" }}>
-                <Button variant="contained">
-                  <AddShoppingCartIcon />{" "}
-                </Button>
+                <AddToCartButton
+                  id={id}
+                  name={gameDetail.name}
+                  picture={gameDetail.background_image}
+                  price={gameDetail.price}
+                  variant='contained'
+                />
               </Box>
               {/* ADDWISHES_ICON */}
               <Box>
@@ -170,6 +225,7 @@ export default function Detail() {
                   name={gameDetail.name}
                   image={gameDetail.background_image}
                   price={gameDetail.price}
+                  variant='contained'
                 />
               </Box>
             </Box>
@@ -180,7 +236,7 @@ export default function Detail() {
               className="imagen"
               display="inline-block"
               sx={{ borderRadius: "4px" }}
-              >
+            >
               {/* CARRUSEL */}
               <Carousel className="carusel">
                 {imgCarousel.map((item) => (
@@ -195,9 +251,8 @@ export default function Detail() {
                 variant="body2"
                 textAlign="justify"
                 color="text.primary"
-                >
-
-               {gameDetail.description? parse(gameDetail.description) : null}
+              >
+                {gameDetail.description ? parse(gameDetail.description) : null}
               </Typography>
             </Box>
           </Box>
@@ -222,7 +277,7 @@ export default function Detail() {
               variant="body2"
               color="text.primary"
             >
-              {gameDetail.requirements? parse(gameDetail.requirements) : null}
+              {gameDetail.requirements ? parse(gameDetail.requirements) : null}
             </Typography>
           </Box>
         </Box>
@@ -230,11 +285,12 @@ export default function Detail() {
       {/* SECCION RESEÑAS */}
       <section>
         <Box className="newComment">
-          <Box>
-            <AccountBoxIcon sx={{ fontSize: 50 }} />
+          <Box className="formComment">
+            <Avatar alt={"H"} src={imgLink} />
           </Box>
+          <form onSubmit={handleSubmit} className="formComment">
           <Box
-            width={340}
+            width={580}
             sx={{
               bgcolor: "secondary.text",
               borderColor: "primary.main",
@@ -245,47 +301,62 @@ export default function Detail() {
           >
             <TextField
               onChange={handleChange}
+              type="form"
               id="standard-multiline-static"
               fullWidth
-              label="Reseñas"
-              value={value}
+              label="Reviews"
+              name="text"
+              value={value.comment.text}
               multiline
               rows={4}
-              placeholder="Agrega un comentario..."
+              placeholder="Post a review..."
               variant="standard"
             />
             <Box
               className="postActions"
               sx={{
-                bgcolor: "#90caf9",
+                bgcolor: "#c0c0c0",
                 borderColor: "secondary.main",
-                border: 1,
               }}
             >
               <Box className="iconsComment">
-                <IconButton onClick={handleBold}>
-                  <FormatBoldIcon />
+                <IconButton  onClick={handleBold}>
+                  <FormatBoldIcon className="iconitos"/>
                 </IconButton>
-                <IconButton onClick={handleItalic}>
-                  <FormatItalicIcon />
+                <IconButton  onClick={handleItalic}>
+                  <FormatItalicIcon className="iconitos"/>
                 </IconButton>
-                <IconButton onClick={handleUnderline}>
-                  <FormatUnderlinedIcon />
+                <IconButton  onClick={handleUnderline}>
+                  <FormatUnderlinedIcon className="iconitos" />
                 </IconButton>
-                <IconButton onClick={handleLink}>
-                  <LinkIcon />
+                <IconButton  onClick={handleLink}>
+                  <LinkIcon className="iconitos"/>
                 </IconButton>
                 <IconButton onClick={handleQuote}>
-                  <FormatQuoteIcon />
+                  <FormatQuoteIcon className="iconitos"/>
                 </IconButton>
               </Box>
             </Box>
           </Box>
+          <Box sx={{
+                paddingTop: 1,
+              }}>
+            <Button type='submit' variant="outlined">Submit</Button>
+          </Box>
+          </form>
           <Box>
-            <Button variant={"contained"}>Submit</Button>
+          <Typography component="legend">Rating</Typography>
+      <Rating
+        name="rating_like"
+        value={estrella}
+        onClick={handleStar}
+        onChange={(event, newValue) => {
+          setEstrella(newValue);
+        }}
+      />
           </Box>
         </Box>
-          <Comments/>
+        <Comments />
       </section>
     </Container>
   );

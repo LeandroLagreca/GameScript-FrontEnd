@@ -1,6 +1,6 @@
 import axios from "axios";
-import { setInfo, addToPurchases, addToCollection } from "../reducers/user";
-const API = "https://gamescript22.herokuapp.com/";
+import { setInfo, addToPurchases, addToCollection, getAllUserComments } from "../reducers/user";
+const API = 'https://gamescript.vercel.app';
 
 export const getUserInfo = (email) => {
   return async function (dispatch) {
@@ -32,3 +32,14 @@ export const addCollection = (game) => {
     }
   };
 };
+
+export const getUserComments = (ID) => {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.get(API + "user/comments?userID=" + ID)
+      dispatch(getAllUserComments(data))
+    } catch (error) {
+      return null
+    }
+  }
+}
