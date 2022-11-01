@@ -14,7 +14,7 @@ export default function SelectGenere() {
 	const { genre } = useSelector(state => state.videogames.filters)
 	
 	useEffect(() => {
-		axios.get('http://localhost:3001/genres')
+		axios.get('https://gamescript-pf.herokuapp.com/genres')
 		.then(response => setOptions(response.data))
 	}, [])
 
