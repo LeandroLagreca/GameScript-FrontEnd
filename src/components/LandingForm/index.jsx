@@ -68,7 +68,7 @@ export default function LandingForm({ register, setRegister }) {
       password,
       prevCart,
     };
-    await axios.post("https://gamescript-pf.herokuapp.com/register", newUserData);
+    await axios.post("https://gamescript.vercel.app/register", newUserData);
     setRegister(false);
   }
 
@@ -115,7 +115,7 @@ export default function LandingForm({ register, setRegister }) {
   }
   async function handleReset(email) {
     const actionCodeSettings = {
-      url: "https://gamescript-pf.herokuapp.com/",
+      url: "https://gamescript.vercel.app/home",
       handleCodeInApp: true,
     };
     sendPasswordResetEmail(auth, (email = userInfo.email), actionCodeSettings);
