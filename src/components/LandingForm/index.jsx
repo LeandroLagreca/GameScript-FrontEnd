@@ -1,23 +1,28 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import axios from 'axios'
-import { getUserInfo } from "../../redux/actions/user";
+import axios from "axios";
 import {
   Box,
   Button,
   FormControl,
   OutlinedInput,
   InputLabel,
-  FormHelperText ,
+  FormHelperText,
   InputAdornment,
+  Link as MuiLink,
 } from "@mui/material";
-import { Check, PriorityHigh } from '@mui/icons-material';
-import {auth} from "../../firebase/credenciales";
-import {signInWithEmailAndPassword, sendPasswordResetEmail, signInWithRedirect , GoogleAuthProvider} from "firebase/auth";
+import { Check, PriorityHigh } from "@mui/icons-material";
+import { auth } from "../../firebase/credenciales";
+import {
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  signInWithRedirect,
+  GoogleAuthProvider,
+} from "firebase/auth";
 import Swal from "sweetalert2";
-import { setSigned } from "../../redux/reducers/user";
 import validation from "./validations";
+import { getUserInfo } from "../../redux/actions/user";
 const styles = {
   container: {
     display: "flex",
@@ -35,15 +40,15 @@ export default function LandingForm({ register, setRegister }) {
     email: "",
     password: "",
   });
-  const [errors, setErrors] = useState({})
+  const [errors, setErrors] = useState({});
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const check = validation(userInfo)
-    setErrors(check)
-  }, [userInfo])
+    const check = validation(userInfo);
+    setErrors(check);
+  }, [userInfo]);
 
   function handleChange(e) {
     const value = e.target.value;
@@ -56,14 +61,17 @@ export default function LandingForm({ register, setRegister }) {
   }
 
   async function registarUsuario(email, password) {
+    const localCart = localStorage.getItem("cartList");
+    const prevCart = localCart ? JSON.parse(localCart) : [];
     const newUserData = {
       email,
-      password
+      password,
+      prevCart,
     };
-    await axios.post('https://gamescript.vercel.app/register', newUserData);
+    await axios.post("https://gamescript-pf.herokuapp.com/register", newUserData);
     setRegister(false);
   }
-  
+
   async function submitHandler(e) {
     e.preventDefault();
     const email = userInfo.email;
@@ -73,41 +81,49 @@ export default function LandingForm({ register, setRegister }) {
         await registarUsuario(email, password);
       } catch (error) {
         Swal.fire({
-          text:"Email already in use", 
-          icon:"error"
+          text: "Email already in use",
+          icon: "error",
         });
       }
     } else {
-      try {
-        const { user } = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        if (user) {
-          dispatch(getUserInfo(user.email))
-          dispatch(setSigned('logged'));
-          navigate("/home");
+      dispatch(getUserInfo(email, true))
+      .then(async (info) => {
+        if (!info) {
+          return Swal.fire({
+            text: "No estas registrado",
+            icon: "error",
+          });
+        } else {
+          try {
+            const { user } = await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
+            if (user) {
+              navigate("/home");
+            }
+          } catch (error) {
+            Swal.fire({
+              text: "Credenciales invalidas",
+              icon: "error",
+            });
+          }
         }
-      } catch (error) {
-        Swal.fire({
-          text:"You need to register", 
-          icon:"error"
-        });
-      }
+      });
     }
   }
-async function handleReset(email){
-  const actionCodeSettings = {
-    url:'https://gamescript.vercel.app',
-    handleCodeInApp: true,
-  };
-sendPasswordResetEmail(auth, email = userInfo.email, actionCodeSettings)
-}
-async function handleGoogle(){
-const provider =  new GoogleAuthProvider();
-signInWithRedirect(auth, provider)
-}
+  async function handleReset(email) {
+    const actionCodeSettings = {
+      url: "https://gamescript-pf.herokuapp.com/",
+      handleCodeInApp: true,
+    };
+    sendPasswordResetEmail(auth, (email = userInfo.email), actionCodeSettings);
+  }
+  async function handleGoogle() {
+    const provider = new GoogleAuthProvider();
+    signInWithRedirect(auth, provider);
+  }
   return (
     <Box component={"form"} onSubmit={submitHandler} sx={styles.container}>
       <FormControl>
@@ -122,22 +138,28 @@ signInWithRedirect(auth, provider)
           value={userInfo.email}
           type="email"
         />
-        {
-          register ? (
-            <>
-              <FormHelperText variant="outlined" >
-                {errors?.emailRequired ? <PriorityHigh color="warning" /> : <Check color="success" /> }
-                Es requerido
-              </FormHelperText>
-              <FormHelperText variant="outlined" >
-                {errors?.emailFormat ? <PriorityHigh color="warning" /> : <Check color="success" /> }
-                Debe tener formato de email
-              </FormHelperText>
-            </>
-          ) : (
-            <></>
-          )
-        }
+        {register ? (
+          <>
+            <FormHelperText variant="outlined">
+              {errors?.emailRequired ? (
+                <PriorityHigh color="warning" />
+              ) : (
+                <Check color="success" />
+              )}
+              Es requerido
+            </FormHelperText>
+            <FormHelperText variant="outlined">
+              {errors?.emailFormat ? (
+                <PriorityHigh color="warning" />
+              ) : (
+                <Check color="success" />
+              )}
+              Debe tener formato de email
+            </FormHelperText>
+          </>
+        ) : (
+          <></>
+        )}
       </FormControl>
       <FormControl>
         <InputLabel variant="outlined" htmlFor="password">
@@ -151,38 +173,43 @@ signInWithRedirect(auth, provider)
           type="password"
           label="Password"
         >
-          <InputAdornment position="end" >Show</InputAdornment>
+          <InputAdornment position="end">Show</InputAdornment>
         </OutlinedInput>
-        {
-          register ? (
-            <>
-              <FormHelperText variant="outlined" >
-                {errors?.passRequired ? <PriorityHigh color="warning" /> : <Check color="success" /> }
-                Es requerido
-              </FormHelperText>
-              <FormHelperText variant="outlined" >
-                {errors?.passFormat ? <PriorityHigh color="warning" /> : <Check color="success" /> }
-                Debe tener entre 6 y 14 caracters, al menos un digito, una minuscula y una mayuscula
-              </FormHelperText>
-            </>
-          ) : (
-            <></>
-          )
-        }
-        {
-          register && Object.keys(errors).length ? (
-            <></>
-          ) : (
-            <Button type="submit" sx={styles.button} variant="outlined">
-              {register ? "registrate" : "iniciar sesion"}
-            </Button>
-          )
-        }
-        <Link to="/home">
+        {register ? (
+          <>
+            <FormHelperText variant="outlined">
+              {errors?.passRequired ? (
+                <PriorityHigh color="warning" />
+              ) : (
+                <Check color="success" />
+              )}
+              Es requerido
+            </FormHelperText>
+            <FormHelperText variant="outlined">
+              {errors?.passFormat ? (
+                <PriorityHigh color="warning" />
+              ) : (
+                <Check color="success" />
+              )}
+              Debe tener entre 6 y 14 caracters, al menos un digito, una
+              minuscula y una mayuscula
+            </FormHelperText>
+          </>
+        ) : (
+          <></>
+        )}
+        {register && Object.keys(errors).length ? (
+          <></>
+        ) : (
+          <Button type="submit" sx={styles.button} variant="outlined">
+            {register ? "registrate" : "iniciar sesion"}
+          </Button>
+        )}
+        <MuiLink component={Link} to="/home" underline="none">
           <Button>invitado</Button>
-        </Link>
-        <Button  onClick={handleReset}>Reset password</Button>
-        <Button  onClick={handleGoogle}>Inicia con Google</Button>
+        </MuiLink>
+        <Button onClick={handleReset}>Reset password</Button>
+        <Button onClick={handleGoogle}>Inicia con Google</Button>
       </FormControl>
     </Box>
   );

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, IconButton } from "@mui/material";
+import { Button } from "@mui/material";
 import { AddShoppingCart, RemoveShoppingCart } from "@mui/icons-material";
 
-import { addToCart, deleteFromCart } from "../../redux/reducers/user";
+import { addToCart, deleteFromCart } from "../../redux/actions/user";
 import Swal from "sweetalert2";
 
 const buttonStyles = {
@@ -20,12 +20,11 @@ export default function AddToCartButton({
   ...props
 }) {
   const cartList = useSelector((state) => state.user.cartList);
-  const user = useSelector((state) => state.user.status);
   const [alreadyIs, setAlreadyIs] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const find = cartList.some((el) => el.id === id);
+    const find = cartList.some((el) => Number(el.id) === Number(id));
     if (find) setAlreadyIs(true);
     else setAlreadyIs(false);
   }, [cartList, id]);

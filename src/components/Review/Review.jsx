@@ -9,10 +9,29 @@ const Review = () => {
 	const cartList = useSelector((state) => state.user.cartList);
 
 	let totalPrice = cartList.map((e) => {
-		return parseFloat(e.price);
+		if (e.price == null) {
+			return 0;
+		} else {
+			return {
+				cant: e.cant,
+				price: parseFloat(e.price)
+			};
+		}
 	});
 
-	totalPrice = totalPrice.reduce((a, b) => a + b, 0);
+	totalPrice = totalPrice.reduce((a, b) => a + b.price * b.cant, 0);
+
+	if (Number.isInteger(totalPrice)) {
+		totalPrice = totalPrice + '00';
+		totalPrice = parseFloat(totalPrice);
+	} else {
+		let splitedPrice = totalPrice.toFixed(2);
+		splitedPrice = splitedPrice.toString();
+		if (splitedPrice[4] === undefined) {
+			splitedPrice = splitedPrice + '0';
+		}
+    totalPrice = parseFloat(splitedPrice)
+	}
 
 	return (
 		<React.Fragment>
@@ -23,14 +42,14 @@ const Review = () => {
 				{cartList.map((product) => (
 					<ListItem key={product.name} sx={{ py: 1, px: 0 }}>
 						<ListItemText primary={product.name} />
-						<Typography variant="body2">{product.price}</Typography>
+						<Typography variant="body2">${product.price}</Typography>
 					</ListItem>
 				))}
 
 				<ListItem sx={{ py: 1, px: 0 }}>
 					<ListItemText primary="Total" />
 					<Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-						{totalPrice}
+						${totalPrice}
 					</Typography>
 				</ListItem>
 			</List>

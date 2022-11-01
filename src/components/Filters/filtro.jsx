@@ -7,18 +7,18 @@ import { setLoading } from '../../redux/reducers/videoGame';
 import { useEffect } from 'react';
 import { getGames } from '../../redux/actions/videoGame';
 import { Box, List, ListItem, ListSubheader } from '@mui/material';
-
+import "./filter.css"
 
 
 export default function Filter() {
 	const { filters } = useSelector(state => state.videogames)
 	const { page } = useSelector(state => state.videogames)
 	const dispatch = useDispatch()
-	const { search, rating, price, genre, sort } = filters
+	const { name, rating, price, genre, sort } = filters
 	
 	useEffect(() => {
 		const filter = {
-			name: search || '',
+			name: name || '',
 			rating: rating || '',
 			price: price || '',
 			genre: genre || ''
@@ -29,16 +29,16 @@ export default function Filter() {
 		const parsePage = JSON.stringify(page);
 		window.sessionStorage.setItem('filters', parseFilter);
 		window.sessionStorage.setItem('page', parsePage);
-	}, [page, sort, search, rating, price, genre, dispatch])
+	}, [page, sort, name, rating, price, genre, dispatch])
 
 	return (
-				<Box sx={{display:"flex", textAling:"center"}}>
+				<Box className='Filters' sx={{display:"flex", textAling:"center", alignItems: 'center'}}>
 
 					<List 
 					subheader={
-						<ListSubheader>
+						<Box   sx={{fontSize: 40, color: "black"}} >
 						  Filters
-						</ListSubheader>
+						</Box>
 					  }>
 						<ListItem sx={{marginLeft:"45px"}}>
 							<SelectRating />

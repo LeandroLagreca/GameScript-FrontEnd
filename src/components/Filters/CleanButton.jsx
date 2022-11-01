@@ -12,9 +12,9 @@ export default function DisableElevation() {
 		dispatch(cleanToFilter())
 	}
   return (
-      <Button onClick={e=>{handleClick(e)}} variant="contained" disableElevation color={"secondary"}>
+      <Button onClick={e=>{handleClick(e)}} sx={{mt:1}} variant="contained" disableElevation color={"secondary"}>
         <IconButton >
-          <Typography>Reset filters</Typography>
+          <Typography color={"primary"} >Reset filters</Typography>
           <RotateLeftIcon ></RotateLeftIcon>
         </IconButton>
       </Button>
