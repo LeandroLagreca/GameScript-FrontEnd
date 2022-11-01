@@ -68,7 +68,7 @@ export default function LandingForm({ register, setRegister }) {
       password,
       prevCart,
     };
-    await axios.post("https://gamescript.vercel.app/register", newUserData);
+    await axios.post("https://gamescript-pf.herokuapp.com/register", newUserData);
     setRegister(false);
   }
 
