@@ -92,12 +92,12 @@ const Cart = () => {
     if (!error) {
       const { id } = paymentMethod;
       try {
-        await axios.post("http://localhost:3001/payment", {
+        await axios.post("https://gamescript-proyect.herokuapp.com/payment", {
           id,
           amount: totalPrice, //cents
         });
 
-        const order = await axios.post("http://localhost:3001/orders", {
+        const order = await axios.post("https://gamescript-proyect.herokuapp.com/orders", {
           userData: {
             userID: userId,
             ...address,
