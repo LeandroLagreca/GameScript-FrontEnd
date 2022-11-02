@@ -17,7 +17,6 @@ export const getGames = ({ name, rating, price, genre } = "", sort, page) => {
   return async function (dispatch) {
     try {
       const { data } = await axios(API + `videogames?${queries}`);
-      console.log(data);
       dispatch(
         getAllGames({
           games: data.games,

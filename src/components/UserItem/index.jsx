@@ -14,7 +14,7 @@ export default function UserItem({ username, email, admin, id }) {
 
 	function changeAdmin(e) {
 		const value = e.target.value;
-		axios.put("http://localhost:3001/user/" + id, {
+		axios.put("https://gamescript-proyect.herokuapp.com/user/" + id, {
 			admin: value
 		});
 	}

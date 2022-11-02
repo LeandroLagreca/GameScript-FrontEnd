@@ -31,7 +31,7 @@ export default function ReviewForm({gameId, userId}) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-		axios.get(`http://localhost:3001/user/comments?userID=${id}`)
+		axios.get(`https://gamescript-proyect.herokuapp.com/user/comments?userID=${id}`)
 		.then(response => response.data.comments.map( review => review.videogameId ))
 		.then(results => setPrevReviews(results))
 		.catch(() => setPrevReviews([]))
