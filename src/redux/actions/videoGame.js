@@ -10,7 +10,7 @@ import {
   putAllGames
 } from "../reducers/videoGame";
 
-const API = "https://gamescript-pf.herokuapp.com/";
+const API = "https://gamescript-proyect.herokuapp.com/";
 
 export const getGames = ({ name, rating, price, genre } = "", sort, page) => {
   const queries = `filter[name]=${name}&filter[rating]=${rating}&filter[price]=${price}&filter[genre]=${genre}&options[sort]=${sort}&options[page]=${page}`;

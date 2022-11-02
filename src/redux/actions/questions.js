@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getGameQuestions, setGameQuestions } from '../reducers/videoGame';
 
-const API = "https://gamescript-pf.herokuapp.com/";
+const API = "https://gamescript-proyect.herokuapp.com/";
 
 export const getQuestions = (id) => {
 	return async function (dispatch) {

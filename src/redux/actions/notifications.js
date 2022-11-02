@@ -1,7 +1,7 @@
 import axios from "axios";
 import { updateNotifications } from "../reducers/user";
 import { store } from "../store";
-const API = "https://gamescript-pf.herokuapp.com/";
+const API = "https://gamescript-proyect.herokuapp.com/";
 
 export const deleteFromNotifications = (notiId) => {
   const { id, notifications } = store.getState().user;

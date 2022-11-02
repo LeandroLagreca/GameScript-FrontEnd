@@ -41,7 +41,7 @@ export default function AdminOrders() {
   useEffect(() => {
     console.log(filters)
     const queries = `filter[name]=${filters.name}&filter[status]=${filters.status}&filter[date]=`
-    axios.get('https://gamescript-pf.herokuapp.com/orders?' + queries)
+    axios.get('https://gamescript-proyect.herokuapp.com/orders?' + queries)
     .then(response => setOrders(response.data))
     .catch(() => setOrders([]))
   }, [filters])
@@ -59,7 +59,7 @@ export default function AdminOrders() {
       confirmButtonText: "Si",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.put('https://gamescript-pf.herokuapp.com/orders/' + id, {
+        axios.put('https://gamescript-proyect.herokuapp.com/orders/' + id, {
           status: value
         } )
       } else if (result.isDismissed) {
