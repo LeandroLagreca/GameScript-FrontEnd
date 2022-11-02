@@ -208,6 +208,13 @@ const Sidebar = () => {
 					</Link>
 				</List>
 				<List>
+				<Link
+						component={RouterLink}
+						to={'/about'}
+						underline="none"
+						sx={mode === 'dark' ? { color: 'white' } : { color: 'black' }}
+						className="navlink"
+					>
 					<ListItem>
 						<ListItemButton>
 							<ListItemIcon>
@@ -216,9 +223,10 @@ const Sidebar = () => {
 							<ListItemText primary={'About'} />
 						</ListItemButton>
 					</ListItem>
+				</Link>
 				</List>
 				<List>
-					<Link component={"a"} underline="none" sx={mode === 'dark' ? { color: 'white' } : { color: 'black' }} href="#contacto" spy={true} smooth={true} offset={50} duration={500} >
+					<Link component={"a"} underline="none" sx={mode === 'dark' ? { color: 'white' } : { color: 'black' }} href="#contacto"  offset={50} duration={500} >
 					<ListItem>
 						<ListItemButton >
 							<ListItemIcon>

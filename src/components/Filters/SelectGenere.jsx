@@ -14,7 +14,7 @@ export default function SelectGenere() {
 	const { genre } = useSelector(state => state.videogames.filters)
 	
 	useEffect(() => {
-		axios.get('https://gamescript-pf.herokuapp.com/genres')
+		axios.get("https://gamescript-pf.herokuapp.com/genres")
 		.then(response => setOptions(response.data))
 	}, [])
 
@@ -24,7 +24,7 @@ export default function SelectGenere() {
 
 	return (
 		<div>
-			<FormControl sx={{ m: 1, minWidth: 100, backgroundColor:"secondary.main",  borderRadius:1 }}>
+			<FormControl sx={{ m: 1, minWidth: 160, backgroundColor:"secondary.main",  borderRadius:1, }}>
 				<InputLabel>Genere</InputLabel>
 				<Select value={genre} onChange={handleGenere} autoWidth label="Genere">
 					<MenuItem value="">

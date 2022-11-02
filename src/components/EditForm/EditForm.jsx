@@ -9,7 +9,7 @@ import InputLabel from '@mui/material/InputLabel';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getGenres,postGames } from '../../redux/actions/videoGame';
+import { getGenres,putGames } from '../../redux/actions/videoGame';
 import {useParams} from "react-router-dom";
 
 function validate(input){
@@ -53,8 +53,10 @@ function validate(input){
     
 
 export default function ComposedTextField() {
-//   const {id}= useParams()
-//   console.log(id)
+ const { id } = useParams();
+ console.log(id)
+ 
+
   const dispatch = useDispatch()
   const generos = useSelector((state)=> state.videogames.genres)
   const [errors,setErrors] = useState({})
@@ -66,7 +68,9 @@ export default function ComposedTextField() {
   rating:0,
   requirements:"",
   genres:[],
-  otro:""
+  otro:"",
+  newGenres:[]
+
   })  
 
 
@@ -86,7 +90,14 @@ export default function ComposedTextField() {
 function handleSelect(e) {
     setInput({
         ...input,
-        genres:[...input.genres, e.target.value] //concatena las dietas al estado
+        genres:[...input.genres, e.target.value] 
+    }) 
+}
+
+function handlePush(e) {
+    setInput({
+        ...input,
+        newGenres:[...input.newGenres.push(input.otro), e.target.value]
     }) 
 }
 
@@ -103,10 +114,10 @@ function handleDelete(el){
   function handleSubmit(e){
     e.preventDefault();
     if(input.name && input.description&&input.background_image&&input.price&&input.rating&&input.requirements
-        &&!errors.name&& !errors.description&&!errors.background_image&&!errors.price&&!errors.rating&&!errors.requirements&&input.genres.length !==0 &&input.genres.length<=3)
+        &&!errors.name&& !errors.description&&!errors.background_image&&!errors.price&&!errors.rating&&!errors.requirements)
 
-    {dispatch(postGames(input))
-    alert("Juego creado con exito!")
+    {dispatch(putGames(input, id))
+    //alert("Juego creado con exito!")
     setInput({
         name:"",
         description:"",
@@ -114,7 +125,9 @@ function handleDelete(el){
         price:0,
         rating:0,
         requirements:"",
-        genres:[]
+        genres:[],
+        newGenres:[]
+
     })}
     else alert ("Por favor, complete el formulario correctamente")
 }
@@ -256,13 +269,15 @@ useEffect(()=> {
                             value={input.genres}
                             aria-describedby="component-error-text"><MenuItem>Seleccione</MenuItem>
                             {generos&& generos.map(e=>(<MenuItem key={e.name} value={e.name}>{e.name}</MenuItem>))}
-                            <MenuItem value="otro">Otro</MenuItem>
+                            {/* <MenuItem value="otro">Otro</MenuItem> */}
                             </Select>
-                            {input.genres.includes("otro")?<FormControl variant="standard">
+                            <FormControl variant="standard">
                             <InputLabel htmlFor="component-simple">Otro genero</InputLabel>
                             <Input id="component-simple" name="otro" value={input.otro} onChange={handleChange} />
-                        </FormControl> :null}
-                        {/* {input.otro&& input.genres.replace("otro",input.otro)} */}
+                            <Button onClick={handlePush}>Agregar</Button>
+                        </FormControl>
+                       
+
                             {/* <FormHelperText id="component-error-text">{errors.requirements}</FormHelperText> */}
                             {console.log(input)}
                             {/* {input.genres.map(el=> 
@@ -271,6 +286,7 @@ useEffect(()=> {
                             <button onClick={handleDelete} >x</button>
                         </div>
                         )} */}
+                        {console.log(input.genres)}
                         </FormControl>
                     </CardContent>
                     {Object.entries(errors).length===0 && input.name!==""?<CardContent>   
