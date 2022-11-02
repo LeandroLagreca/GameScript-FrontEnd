@@ -55,10 +55,10 @@ export default function Discounts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios("http://localhost:3001/discounts")
+    axios("https://gamescript-pf.herokuapp.com/discounts")
     .then(response => setDiscounts(response.data))
     .then(() => {
-      axios('http://localhost:3001/images/discounts')
+      axios('https://gamescript-pf.herokuapp.com/images/discounts')
       .then(response => setBanner(response.data.image))
     })
     .then(() => setLoading(false))
@@ -73,7 +73,7 @@ export default function Discounts() {
     if (!inputValue) return Swal.fire("No se puede subir un archivo vacio");
     const data = new FormData();
     data.append('image', inputValue)
-    const url = "http://localhost:3001/images/discounts";
+    const url = "https://gamescript-pf.herokuapp.com/images/discounts";
     const image = await axios.post(url, data);
     if(image) setBanner(image.data)
   }

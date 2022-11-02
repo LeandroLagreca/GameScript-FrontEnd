@@ -10,7 +10,7 @@ export default function MyQuestions() {
     const [ questions, setQuestions ] = useState([])
   
     useEffect(() => {
-      axios.get(`http://localhost:3001/questions?userId=${id}`)
+      axios.get(`https://gamescript-pf.herokuapp.com/questions?userId=${id}`)
       .then(response => setQuestions(response.data?.reverse()))
       .catch(() => setQuestions([]))
       .finally(() => setIsLoading(false))

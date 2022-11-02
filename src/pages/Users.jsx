@@ -14,7 +14,7 @@ export default function Users() {
 
 	useEffect(() => {
     const queries = `filter[name]=${filters.name}`
-		axios.get('http://localhost:3001/user?' + queries)
+		axios.get('https://gamescript-pf.herokuapp.com/user?' + queries)
     .then(response => {
       if(Array.isArray(response.data)) {
         setUsers(response.data)
