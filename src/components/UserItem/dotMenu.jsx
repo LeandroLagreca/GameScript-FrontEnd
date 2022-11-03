@@ -33,8 +33,8 @@ export default function DotMenu({id}) {
 		alert('Cambiar email')
 	}
 
-   async function handleDelete(id) {
-        await axios.delete("https://gamescript-proyect.herokuapp.com/user/" + id);
+    function handleDelete(id) {
+       // await axios.delete("https://gamescript-proyect.herokuapp.com/user/" + id);
         alert('Seguro que quieres eliminar este usuario?')
       }
 
