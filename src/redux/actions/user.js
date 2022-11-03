@@ -12,7 +12,6 @@ import {
 } from '../reducers/user';
 import { store } from '../store';
 const API = "https://gamescript-proyect.herokuapp.com/";
-
 export const getUserInfo = (email, auth) => {
 	return async function (dispatch) {
 		try {
