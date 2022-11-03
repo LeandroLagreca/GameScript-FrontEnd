@@ -126,7 +126,7 @@ export default function LandingForm({ register, setRegister }) {
   }
   async function handleReset(email) {
     const actionCodeSettings = {
-      url: "https://gamescript-proyect.herokuapp.com/home",
+      url: "https://game-script.vercel.app/home",
       handleCodeInApp: true,
     };
     sendPasswordResetEmail(auth, (email = userInfo.email), actionCodeSettings);
