@@ -29,12 +29,12 @@ export default function DotMenu({id}) {
 
 
 	function requestNewEmail() {
-		// axios.put("http://localhost:3001/user/");
+		// axios.put("https://gamescript-proyect.herokuapp.com/user/");
 		alert('Cambiar email')
 	}
 
-    function handleDelete(id) {
-        // axios.delete("http://localhost:3001/user/" + id);
+   async function handleDelete(id) {
+        await axios.delete("https://gamescript-proyect.herokuapp.com/user/" + id);
         alert('Seguro que quieres eliminar este usuario?')
       }
 
