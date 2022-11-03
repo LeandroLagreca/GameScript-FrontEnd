@@ -217,7 +217,7 @@ export default function Detail() {
             <Box className="newComment">
               <form onSubmit={handleSubmit} className="formComment">
                 <TextForm cb={setQuestionText} value={questionText} />
-                <Button type="submit" sx={{ marginLeft: 5, marginY: 3 }} variant="outlined">
+                <Button type="submit" sx={{ marginLeft: 5, marginY: 3 }} variant="contained">
                   Submit
                 </Button>
               </form>

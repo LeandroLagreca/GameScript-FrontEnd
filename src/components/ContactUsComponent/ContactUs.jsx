@@ -18,8 +18,8 @@ const ContactComponent = () => {
       email:""
     })
     const [errors, setErrors] = useState({})
-    console.log(contactInfo)
-    console.log(errors)
+    
+    
     
    
     useEffect(() => {
