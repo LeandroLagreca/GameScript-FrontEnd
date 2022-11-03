@@ -125,7 +125,12 @@ export default function Detail() {
                       {details.name} {/* NOMBRE */}
                     </Typography>
                     <Typography variant="h6" color={"white"}>
-                      ${details.price} {/* PRECIO */}
+                      {
+                        details.stock < 1 ? 
+                          'No disponible' :
+                          `$${details.price} `
+                      }
+                      
                     </Typography>
                   </Box>
                   <Box display="flex" sx={{ border: "" }}>
@@ -215,8 +220,8 @@ export default function Detail() {
           {/*---------------- SECCION RESEÑAS ---------------------*/}
           <section>
             <Box className="newComment">
-              <form onSubmit={handleSubmit} className="formComment">
-                <TextForm cb={setQuestionText} value={questionText} />
+              <form onSubmit={handleSubmit} className="formComment" >
+                <TextForm cb={setQuestionText} value={questionText}  />
                 <Button type="submit" sx={{ marginLeft: 5, marginY: 3 }} variant="contained">
                   Submit
                 </Button>
