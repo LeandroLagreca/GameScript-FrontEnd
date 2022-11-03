@@ -51,7 +51,7 @@ export default function CartWidget() {
     if (Number.isInteger(totalPrice)) {
       totalPrice = totalPrice + '00';
       totalPrice = parseFloat(totalPrice);
-      console.log(totalPrice)
+      
     } else {
       let splitedPrice = totalPrice.toFixed(2);
       splitedPrice = splitedPrice.toString();
