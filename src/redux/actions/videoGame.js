@@ -7,7 +7,7 @@ import {
   cleanFilter,
   getAllGenres,
   postAllGames,
-  putAllGames
+  
 } from "../reducers/videoGame";
 const API = "https://gamescript-proyect.herokuapp.com/";
 export const getGames = ({ name, rating, price, genre } = "", sort, page) => {
@@ -58,7 +58,7 @@ export const cleanToFilter = (clean) => {
     try {
       dispatch(cleanFilter(clean));
     } catch (error) {
-      console.log(error);
+      
     }
   };
 };
@@ -88,7 +88,7 @@ export const getGenres = () =>
   export const putGames = (input, id) =>
   async function () { 
     try {
-      const response = await axios.put(API + `videogames/${id}`, input);
+      
     } catch (error) {
       return;
     }

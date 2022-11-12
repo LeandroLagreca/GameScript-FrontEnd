@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Container } from "@mui/system";
+import { AdminLayout } from "../components";
 import Comments from '../sections/Comments'
 export default function AdminQuestions() {
   const [ questions, setQuestions ] = useState([])
@@ -28,6 +29,8 @@ export default function AdminQuestions() {
   }
 
   return (
-    <Comments list={questions} />
+    <AdminLayout>
+      <Comments list={questions} />
+    </AdminLayout>
   );
 }

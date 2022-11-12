@@ -45,7 +45,7 @@ const MyProfile = () => {
 	};
 
 	useEffect(() => {
-		console.log(editProfile);
+		
 	}, [editProfile]);
 
 	const handleSave = (e) => {

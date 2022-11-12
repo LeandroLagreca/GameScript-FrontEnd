@@ -173,7 +173,7 @@ export const addPurchases = (game) => {
 		try {
 			dispatch(addToPurchases(game));
 		} catch (error) {
-			console.log(error);
+			
 		}
 	};
 };
@@ -183,7 +183,7 @@ export const addCollection = (game) => {
 		try {
 			dispatch(addToCollection(game));
 		} catch (error) {
-			console.log(error);
+			
 		}
 	};
 };

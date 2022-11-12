@@ -47,7 +47,7 @@ export const ratingFilter = (current, rating) => {
 
   export const priceFilter = (current, price) => {
     let items = []
-    console.log(current)
+   
     switch (price) {
       case 0:
         items = current

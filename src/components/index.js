@@ -26,3 +26,5 @@ export { default as Answer } from './Answer';
 export { default as NotificationsWidget } from './NotificationsWidget';
 export { default as NotificationCard } from './NotificationCard';
 export {  default as  MyOrders } from './MyOrders';
+export { default as ClientLayout } from './ClientLayout';
+export { default as AdminLayout } from './AdminLayout';

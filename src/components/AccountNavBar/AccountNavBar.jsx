@@ -39,7 +39,7 @@ const AccountNavBar = () => {
 	});
 
 	React.useEffect(() => {
-		// console.log(profile.base64URL);
+		
 	}, [profile]);
 
 	const convertBase64 = (file) => {
@@ -67,7 +67,7 @@ const AccountNavBar = () => {
 				dispatch(putUserData(userData.id, { image: result }));
 			})
 			.catch((error) => {
-				console.log(error);
+				
 			});
 
 	};

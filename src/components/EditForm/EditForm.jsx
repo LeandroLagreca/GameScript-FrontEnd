@@ -14,7 +14,7 @@ import {useParams} from "react-router-dom";
 
 function validate(input){
     var errors = {}
-    console.log(errors)
+    
     if(!input.name){
         errors.name = "El campo nombre es requerido"
     }else if((!/^[A-Za-z0-9\s]+$/g.test(input.name.trim()))){
@@ -54,7 +54,7 @@ function validate(input){
 
 export default function ComposedTextField() {
  const { id } = useParams();
- console.log(id)
+ 
  
 
   const dispatch = useDispatch()
@@ -83,7 +83,7 @@ export default function ComposedTextField() {
         ...input,
         [e.target.name]:e.target.value
     }))
-    console.log(input)     
+        
   };
 
   

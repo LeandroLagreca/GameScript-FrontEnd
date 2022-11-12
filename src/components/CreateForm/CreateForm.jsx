@@ -14,7 +14,6 @@ import {useParams} from "react-router-dom";
 
 function validate(input){
     var errors = {}
-    console.log(errors)
     if(!input.name){
         errors.name = "El campo nombre es requerido"
     }else if((!/^[A-Za-z0-9\s]+$/g.test(input.name.trim()))){
@@ -53,8 +52,6 @@ function validate(input){
     
 
 export default function ComposedTextField() {
-//   const {id}= useParams()
-//   console.log(id)
   const dispatch = useDispatch()
   const generos = useSelector((state)=> state.videogames.genres)
   const [errors,setErrors] = useState({})
@@ -81,7 +78,7 @@ export default function ComposedTextField() {
         ...input,
         [e.target.name]:e.target.value
     }))
-    console.log(input)     
+        
   };
 
   
@@ -277,14 +274,14 @@ useEffect(()=> {
                        
 
                             {/* <FormHelperText id="component-error-text">{errors.requirements}</FormHelperText> */}
-                            {console.log(input)}
+                            
                             {/* {input.genres.map(el=> 
                         <div>
                             <p>{el}</p> 
                             <button onClick={handleDelete} >x</button>
                         </div>
                         )} */}
-                        {console.log(input.genres)}
+
                         </FormControl>
                     </CardContent>
                     {Object.entries(errors).length===0 && input.name!==""?<CardContent>   

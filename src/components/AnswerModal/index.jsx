@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 import {
   Button,
@@ -23,17 +22,17 @@ export default function AnswerModal({userId, questionId, game}) {
   };
 
   const handleSubmit = () => {
-    axios.put('https://gamescript-proyect.herokuapp.com/answer/' + questionId, {
+    axios.put('http://localhost:3001/answer/' + questionId, {
       text: answer
     })
-    .then(() => axios.put(`https://gamescript-proyect.herokuapp.com/user/notifications/${userId}`, {
+    .then(() => axios.put(`http://localhost:3001/user/notifications/${userId}`, {
       text: `Recibiste una respuesta en tu pregunta sobre el juego: ${game}`
     }))
   };
   return (
     <>
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button variant="outlined" onClick={handleClickOpen} sx={{mt:3}}>
           Responder
         </Button>
         <Dialog open={open} onClose={handleClose}>

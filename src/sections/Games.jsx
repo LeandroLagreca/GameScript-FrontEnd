@@ -31,7 +31,7 @@ const Games = () => {
 		return <h3>Uups... no match for your search.</h3>;
 
 	return (
-		<Box flex={6} >
+		<Box flex={6} paddingTop={{xs: 5, sm:0}} >
 			<Box sx={styles.container} >
 				{games?.map((e, index) => {
 					return (
