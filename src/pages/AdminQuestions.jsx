@@ -13,7 +13,7 @@ export default function AdminQuestions() {
   });
 
   useEffect(() => {
-    axios.get('https://gamescript-proyect.herokuapp.com/questions')
+    axios.get('https://gamescript-backend-production.up.railway.app/questions')
     .then(response => response.data.filter(el => !el.answer))
     .then(results => setQuestions(results))
     .catch(() => setQuestions([]))

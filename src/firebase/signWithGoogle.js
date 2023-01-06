@@ -3,7 +3,7 @@ import axios from 'axios'
 export default async function signWithGoogle(user) {
   const { email, displayName, uid, photoURL, emailVerified  } = user
   
-  await axios.post('https://gamescript-proyect.herokuapp.com/login?google=true', {
+  await axios.post('https://gamescript-backend-production.up.railway.app/login?google=true', {
       id: uid,
       email,
       name: displayName,

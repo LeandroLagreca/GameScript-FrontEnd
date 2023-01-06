@@ -11,7 +11,7 @@ export async function makeEmail(to, name, order) {
 			<span>Precio: ${game.price}</span>
 		</li>`
 	))
-    axios.post('http://localhost:3001/sendMail', {
+    axios.post('https://gamescript-backend-production.up.railway.app/sendMail', {
         to,
         subject: 'Compra Realizada con exito!',
         html: `

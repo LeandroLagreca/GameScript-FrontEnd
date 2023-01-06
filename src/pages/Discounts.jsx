@@ -73,7 +73,7 @@ export default function Discounts() {
     if (!inputValue) return Swal.fire("No se puede subir un archivo vacio");
     const data = new FormData();
     data.append('image', inputValue)
-    const url = "https://gamescript-proyect.herokuapp.com/images/discounts";
+    const url = "https://gamescript-backend-production.up.railway.app/images/discounts";
     const image = await axios.post(url, data);
     if(image) setBanner(image.data)
   }

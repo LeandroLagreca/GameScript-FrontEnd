@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getGameComments, setGameComments } from '../reducers/videoGame';
 
-const API = "https://gamescript-proyect.herokuapp.com/";
+const API = "https://gamescript-backend-production.up.railway.app/";
 
 export const getComments = (id) => {
 	return async function (dispatch) {
