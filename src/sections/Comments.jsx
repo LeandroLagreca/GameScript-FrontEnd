@@ -26,13 +26,13 @@ import "./Comments.css";
 
 const parse = require("html-react-parser"); //funcion para parsear html
 
+var userId = "";
 export default function Comments({ list, type }) {
   const { pathname } = useLocation();
   const gameComment = list;
   const user = useSelector((state) => state.user.status);
   const userImage = useSelector((state) => state.user.image);
   const dispatch = useDispatch();
-  let userId = "";
   var userName = "";
   if (auth.currentUser !== null) {
     userId = auth.lastNotifiedUid;

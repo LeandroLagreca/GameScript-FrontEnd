@@ -5,9 +5,9 @@ import FormControl from '@mui/material/FormControl';
 import FormHelperText from '@mui/material/FormHelperText';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getGenres,putGames } from '../../redux/actions/videoGame';
+import { putGames } from '../../redux/actions/videoGame';
 import {useParams} from "react-router-dom";
 
 function validate(input){
