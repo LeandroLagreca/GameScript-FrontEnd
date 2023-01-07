@@ -25,9 +25,8 @@ import { Link as RouterLink  } from 'react-router-dom';
 import { Link } from '@mui/material';
 import Switch from '@mui/material/Switch';
 import Brightness5Icon from '@mui/icons-material/Brightness5';
-import { useContext, useRef } from 'react';
+import { useContext} from 'react';
 import { ColorModeContext } from '../Theme/Theme';
-import { Link as scrollLink } from 'react-scroll';
 import "./Sidebar.css"
 
 
@@ -78,7 +77,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-end',
 }));
 
-const label = { inputProps: { 'aria-label': 'Switch demo' } };
+
 
 const Sidebar = () => {
 	const theme = useTheme();
@@ -86,17 +85,6 @@ const Sidebar = () => {
 	const [open, setOpen] = React.useState(false);
 	const { mode, toggleMode } = useContext(ColorModeContext);
 	// const contact = useRef()
-
-
-	const scrollToSection = (elementRef) => {
-		window.scrollTo({
-			top: elementRef.current.offsetTop,
-			behavior:'smooth'
-		})
-	}
-	
-
-
 
 	const handleDrawerOpen = () => {
 		setOpen(true);

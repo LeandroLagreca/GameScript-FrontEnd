@@ -2,13 +2,11 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import { ColorContextProvider } from "../Theme/Theme";
 import "./Index.css"
 import {
   Box,
   Button,
   FormControl,
-  OutlinedInput,
   FormHelperText,
   InputAdornment,
   Link as MuiLink,

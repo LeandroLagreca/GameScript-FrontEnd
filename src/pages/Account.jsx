@@ -6,8 +6,7 @@ import { AdminContainer } from '../containers';
 import { MyProfile, MyPurchases, MyNotifications, MyOrders } from '../components';
 import { MyQuestions } from '../pages'
 import Sidebar from '../components/Sidebar/Sidebar';
-import { useDispatch, useSelector } from 'react-redux';
-import { putUserData } from '../redux/actions/user';
+
 
 const paths = {
 	profile: '/profile',

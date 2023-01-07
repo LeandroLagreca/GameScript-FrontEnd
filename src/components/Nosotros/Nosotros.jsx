@@ -4,11 +4,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Grid } from '@mui/material';
 import GitHubIcon from '@mui/icons-material/GitHub';
@@ -16,7 +12,6 @@ import {Link} from '@mui/material';
 import imagen from '../Nosotros/mario.png';
 import natal from '../Nosotros/natal.png';
 import lea from '../Nosotros/lea.png';
-import fondo from '../Nosotros/fondo.png';
 import leanlg from '../Nosotros/leanlg.png';
 import cris from '../Nosotros/cristian.png';
 import fede from '../Nosotros/fede.png';
@@ -26,8 +21,8 @@ import { ColorModeContext } from '../Theme/Theme';
 import { useContext } from 'react';
 
 export default function MediaControlCard() {
-	const theme = useTheme();
-	const { mode, toggleMode } = useContext(ColorModeContext);
+	
+	const { mode, /*toggleMode*/ } = useContext(ColorModeContext);
 
 	return (
 		<div>

@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, IconButton, Select, MenuItem, Typography } from "@mui/material";
-import { DeleteForever } from "@mui/icons-material";
+import { Box, Select, MenuItem, Typography } from "@mui/material";
 
 import DotMenu from "./dotMenu";
 

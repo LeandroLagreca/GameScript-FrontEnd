@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Container, FormControl, Select, MenuItem, InputLabel, Input } from "@mui/material";
-import { UsersContainer } from '../containers'
 import { UsersList } from '../sections'
 import { AdminLayout } from '../components';
 

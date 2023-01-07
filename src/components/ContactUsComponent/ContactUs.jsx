@@ -1,17 +1,17 @@
-import { Alert, Button, FormControl, FormHelperText, FormLabel, Grid, TextareaAutosize, TextField, Typography } from '@mui/material';
+import { Button,TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import {React,  useState, useRef } from 'react';
+import {React,  useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
 import "./ContactUs.css"
 import validation from './validations';
-import { Check, PriorityHigh } from '@mui/icons-material';
+
 
 
 
 const ContactComponent = () => {
-    const [result, setResult] = useState(false)
+    const [/*result*/, setResult] = useState(false)
     const [contactInfo, setContactInfo] = useState({
       phone:"",
       fullName:"",

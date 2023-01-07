@@ -17,9 +17,7 @@ import {
 	Account,
 } from './pages';
 
-import { Footer } from './components';
 import Wishes from './components/Wishes/AddtoWishes';
-import Sidebar from './components/Sidebar/Sidebar';
 import Collection from './components/Collection/Collection';
 import LandingPage from './components/Landing/LandingPage';
 import Nosotros from "./components/Nosotros/Nosotros"

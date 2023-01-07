@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Card, CardContent, CardActions, FormControl, Select, MenuItem, InputLabel, Input, Box, Typography } from "@mui/material";
+import { Card, CardContent, CardActions, FormControl, InputLabel, Input, Box, Typography } from "@mui/material";
 import Swal from "sweetalert2";
 
 import { AdminLayout } from "../components";

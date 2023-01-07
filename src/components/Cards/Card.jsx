@@ -8,7 +8,6 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Button,
   Typography,
   Box,
 } from "@mui/material";
@@ -43,7 +42,6 @@ export default function MainCard({
   id,
   discount,
 }) {
-  const { mode, toggleMode } = useContext(ColorModeContext);
   return (
     <Box position="relative" className="efecto">
       <Link

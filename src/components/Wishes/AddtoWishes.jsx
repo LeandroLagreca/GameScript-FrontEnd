@@ -3,8 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { Typography,Button} from "@mui/material";
-import Card from "../Cards/Card";
-import { margin, padding } from "@mui/system";
 import { AddToCartButton, AddToWishes } from "../";
 import "./AddWishes.css";
 
