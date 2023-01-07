@@ -2,7 +2,6 @@ import React from "react";
 import { Container } from "@mui/material";
 import AdminNavBar from "../AdminNavBar";
 import { Box } from "@mui/system";
-//import Navbar from "../Navbar/Navbar";
 import Footer from "../Footer/Footer";
 export default function AdminLayout({ children }) {
   return (

@@ -11,7 +11,6 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { Grid } from '@mui/material';
-//import Navbar from "../Navbar/Navbar"
 import GitHubIcon from '@mui/icons-material/GitHub';
 import {Link} from '@mui/material';
 import imagen from '../Nosotros/mario.png';
