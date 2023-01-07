@@ -16,7 +16,7 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import Navbar from '../Navbar/Navbar';
+//import Navbar from '../Navbar/Navbar';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import VideogameAssetIcon from '@mui/icons-material/VideogameAsset';
 import PercentIcon from '@mui/icons-material/Percent';
