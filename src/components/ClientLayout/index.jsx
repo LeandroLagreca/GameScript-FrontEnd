@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import React from "react";
-import { Navbar, Footer } from "..";
+//import { Navbar, Footer } from "..";
 
 export default function ClientLayout({ children }) {
   return (
