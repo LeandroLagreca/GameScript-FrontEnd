@@ -47,7 +47,7 @@ const Routes = ({ setMode, mode }) => {
 				<Route path="/wishes" element={<Wishes />} />
 				<Route path="/admin/*" element={<AdminPanel />} />
 				<Route path="/cart" element={<Cart />} />
-				<Route path="/purchases" element={<Purchases />} />
+				
 				<Route path="/discounts" element={<Discounts />} />
 				<Route path="*" element={<NotFound />} />
 				<Route path="/colection" element={<Collection />} />

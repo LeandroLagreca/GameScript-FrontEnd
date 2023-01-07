@@ -6,7 +6,7 @@ import Footer from "../Footer/Footer";
 export default function AdminLayout({ children }) {
   return (
       <>
-				<Navbar />
+				
 				<Box display="flex" flexDirection={{xs:'column', sm:'row'}}>
 					<AdminNavBar />
 					<Container component="main" maxWidth="lg" sx={{ minHeight: "100vh", paddingLeft:{xs:0, md:10} }}>

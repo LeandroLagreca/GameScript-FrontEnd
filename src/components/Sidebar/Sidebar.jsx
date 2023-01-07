@@ -120,7 +120,7 @@ const Sidebar = () => {
 					>
 						<MenuIcon />
 					</IconButton>
-					<Navbar />
+					
 				</Toolbar>
 			</AppBar>
 			<Drawer

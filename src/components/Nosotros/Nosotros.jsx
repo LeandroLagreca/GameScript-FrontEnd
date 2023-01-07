@@ -31,7 +31,7 @@ export default function MediaControlCard() {
 
 	return (
 		<div>
-		<Navbar/>
+		
 			<Typography variant='h1' margin={3} fontSize={60}>Our Team</Typography>
 			<Typography margin={1}>
 				We are a group of dedicated programmers who enjoy working as a team.
