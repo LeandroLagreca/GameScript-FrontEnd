@@ -26,7 +26,7 @@ import "./Comments.css";
 
 const parse = require("html-react-parser"); //funcion para parsear html
 
-var userId = "";
+const userId = "";
 export default function Comments({ list, type }) {
   const { pathname } = useLocation();
   const gameComment = list;
