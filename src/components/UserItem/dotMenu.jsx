@@ -20,7 +20,7 @@ export default function DotMenu({id}) {
 
     function requestNewPassword(email) {
       const actionCodeSettings = {
-        url: 'https://gamescript.vercel.app/user/',
+        url: 'gamescript-frontend-production.up.railway.app/user/',
         handleCodeInApp: true,
       };
     sendPasswordResetEmail(auth, email, actionCodeSettings)

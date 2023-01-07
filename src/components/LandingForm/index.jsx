@@ -126,7 +126,7 @@ export default function LandingForm({ register, setRegister }) {
   }
   async function handleReset(email) {
     const actionCodeSettings = {
-      url: "https://game-script.vercel.app/home",
+      url: "gamescript-frontend-production.up.railway.app/home",
       handleCodeInApp: true,
     };
     sendPasswordResetEmail(auth, (email = userInfo.email), actionCodeSettings);
