@@ -19,7 +19,6 @@ import {
 
 import { Footer } from './components';
 import Wishes from './components/Wishes/AddtoWishes';
-//import Purchases from './components/Purchases/Purchases';
 import Sidebar from './components/Sidebar/Sidebar';
 import Collection from './components/Collection/Collection';
 import LandingPage from './components/Landing/LandingPage';
