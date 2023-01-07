@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react';
-
-import { AccountNavBar, Footer, Loader } from '../components';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { AccountNavBar, Footer } from '../components';
+import { Routes, Route} from 'react-router-dom';
 import { AdminContainer } from '../containers';
 import { MyProfile, MyPurchases, MyNotifications, MyOrders } from '../components';
 import { MyQuestions } from '../pages'

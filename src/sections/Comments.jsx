@@ -12,7 +12,6 @@ import FormatUnderlinedIcon from "@mui/icons-material/FormatUnderlined";
 import {
   Button,
   Typography,
-  Container,
   Box,
   Grid,
   TextField,
@@ -33,7 +32,7 @@ export default function Comments({ list, type }) {
   const user = useSelector((state) => state.user.status);
   const userImage = useSelector((state) => state.user.image);
   const dispatch = useDispatch();
-  const userId = "";
+  let userId = "";
   var userName = "";
   if (auth.currentUser !== null) {
     userId = auth.lastNotifiedUid;

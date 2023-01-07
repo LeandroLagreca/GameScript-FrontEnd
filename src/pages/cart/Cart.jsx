@@ -29,12 +29,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   //Aplicando tecnologia de hook stripe hooks
-  const [/*cardPay ,setCardPay*/] = useState({
-    cardNumber: "",
-    cardExpiry: "",
-    cardCvc: "",
-    cardName: "",
-  });
+
 
   const [address, setAddress] = useState({
     firstName: "",

@@ -1,7 +1,5 @@
 import React from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { useContext } from "react";
-import { ColorModeContext } from "../Theme/Theme";
 import { Link } from "@mui/material";
 import {
   Card,

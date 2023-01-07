@@ -4,7 +4,7 @@ import { AdminLayout } from "../components";
 import Comments from '../sections/Comments'
 export default function AdminQuestions() {
   const [ questions, setQuestions ] = useState([])
-  const [filters, setFilters] = useState({
+  const [filters, /*setFilters*/] = useState({
     name: "",
     status: "",
     date: "",

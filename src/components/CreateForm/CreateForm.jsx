@@ -117,11 +117,11 @@ function handlePush(e) {
     })}
     else alert ("Por favor, complete el formulario correctamente")
 }
-
+/*
 useEffect(()=> {
     dispatch(getGenres())
      }, []);
-
+*/
   return (
     <Box
       my={2}
