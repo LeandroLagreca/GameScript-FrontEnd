@@ -10,7 +10,7 @@ export default function UserItem({ username, email, admin, id }) {
 
   async function changeAdmin(e) {
     const value = e.target.value;
-    await axios.put("https://gamescript-proyect.herokuapp.com/user/" + id, {
+    await axios.put("https://gamescript-backend-production.up.railway.app/user/" + id, {
       admin: value,
     });
     navigate(0);

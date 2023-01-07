@@ -33,7 +33,7 @@ export default function ReviewForm({ gameId, userId }) {
 
   useEffect(() => {
     axios
-      .get(`https://gamescript-proyect.herokuapp.com/user/comments?userID=${id}`)
+      .get(`https://gamescript-backend-production.up.railway.app/user/comments?userID=${id}`)
       .then((response) =>
         response.data.comments.map((review) => review.videogameId)
       )

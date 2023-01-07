@@ -79,7 +79,7 @@ export default function LandingForm({ register, setRegister }) {
       password,
       prevCart,
     };
-    await axios.post("https://gamescript-proyect.herokuapp.com/register", newUserData);
+    await axios.post("https://gamescript-backend-production.up.railway.app/register", newUserData);
     setRegister(false);
   }
 

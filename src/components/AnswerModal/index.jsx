@@ -22,10 +22,10 @@ export default function AnswerModal({userId, questionId, game}) {
   };
 
   const handleSubmit = () => {
-    axios.put('http://localhost:3001/answer/' + questionId, {
+    axios.put('https://gamescript-backend-production.up.railway.app/answer/' + questionId, {
       text: answer
     })
-    .then(() => axios.put(`http://localhost:3001/user/notifications/${userId}`, {
+    .then(() => axios.put(`https://gamescript-backend-production.up.railway.app/user/notifications/${userId}`, {
       text: `Recibiste una respuesta en tu pregunta sobre el juego: ${game}`
     }))
   };

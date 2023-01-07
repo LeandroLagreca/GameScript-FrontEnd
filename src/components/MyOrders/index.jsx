@@ -33,7 +33,7 @@ export default function AdminOrders() {
   const [ orders, setOrders ] = useState([])
 
   useEffect(() => {
-    axios.get('https://gamescript-proyect.herokuapp.com/orders/user/'+ id)
+    axios.get('https://gamescript-backend-production.up.railway.app/orders/user/'+ id)
     .then(response => setOrders(response.data.PurchaseOrders))
     .catch(() => setOrders([]))
   }, [id])
