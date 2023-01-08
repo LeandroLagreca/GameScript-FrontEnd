@@ -26,7 +26,6 @@ import "./Comments.css";
 
 const parse = require("html-react-parser"); //funcion para parsear html
 
-const userId = "";
 export default function Comments({ list, type }) {
   const { pathname } = useLocation();
   const gameComment = list;
@@ -34,8 +33,9 @@ export default function Comments({ list, type }) {
   const userImage = useSelector((state) => state.user.image);
   const dispatch = useDispatch();
   var userName = "";
+  //var userId = "";
   if (auth.currentUser !== null) {
-    userId = auth.lastNotifiedUid;
+    //userId = auth.lastNotifiedUid;
     userName = auth.currentUser.email;
   }
   useEffect(() => {}, [gameComment]);
@@ -122,7 +122,7 @@ export default function Comments({ list, type }) {
     value.comment.userComment = userName;
     setValue({
       ...value,
-      userID: auth.lastNotifiedUid,
+     // userID: auth.lastNotifiedUid,
     });
   };
 
@@ -335,7 +335,7 @@ export default function Comments({ list, type }) {
                 {pathname !== "/admin/questions" || c.answer ? (
                   <></>
                 ) : (
-                  <AnswerModal userId={c.userId} questionId={c.id} game={c.videogame.name} />
+                  <AnswerModal questionId={c.id} game={c.videogame.name} />
                 )}
               </Grid>
             </Grid>
