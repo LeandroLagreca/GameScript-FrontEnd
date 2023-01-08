@@ -2,10 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Button } from "@mui/material";
 import { AddShoppingCart, ShoppingCart } from "@mui/icons-material";
-
 import { addToCart, deleteFromCart } from "../../redux/actions/user";
 import Swal from "sweetalert2";
-
 
 export default function AddToCartButton({
   id,
