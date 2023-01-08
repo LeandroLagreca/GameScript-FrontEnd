@@ -1,5 +1,4 @@
 import { ThemeProvider, createTheme } from "@mui/material";
-
 import { createContext, useState, useMemo } from "react";
 
 const savedMode = window.localStorage.getItem('themeMode')
