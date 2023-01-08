@@ -1,7 +1,5 @@
 import React from "react";
 import { Box, Avatar, Container, Divider, Typography } from "@mui/material";
-
-
 const styles = {
 	container: {
 		display: 'flex',
