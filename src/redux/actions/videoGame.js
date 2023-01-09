@@ -14,7 +14,7 @@ export const getGames = ({ name, rating, price, genre } = "", sort, page) => {
   const queries = `filter[name]=${name}&filter[rating]=${rating}&filter[price]=${price}&filter[genre]=${genre}&options[sort]=${sort}&options[page]=${page}`;
   return async function (dispatch) {
     try {
-      const { data } = await axios(`https://gamescript-backend-production.up.railway.app/videogames?${queries}`);
+      const { data } = await axios(API + `videogames?${queries}`);
       dispatch(
         getAllGames({
           games: data.games,
